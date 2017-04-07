@@ -33,6 +33,11 @@ async function main () {
   $.putln(`read_file demo.js`);
   const contents = await $.read_file('demo.js');
   $.putln(`characters in demo.js: ${contents.length}`);
+
+  await $.cd(`node_modules`, async () => {
+    await $.sh('pwd');
+  });
+  await $.sh('pwd');
 }
 
 main();

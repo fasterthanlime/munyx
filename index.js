@@ -255,26 +255,26 @@ $.prompt = async function (msg) {
 }
 
 $.yesno = async function (msg) {
-  const s = await $.prompt(`${msg} (y/n)`);
+  const s = await $.prompt(`${msg} (y/N)`);
   if (s !== 'y') {
     $.say('Bailing out...')
     process.exit(0)
   }
 }
 
-$.cd = function (dir, cb) {
+$.cd = async function (dir, cb) {
   const original_wd = process.cwd()
   var e
   var ret
 
-  $.putln(chalk.green(`☞ entering ${dir}`))
+  $.putln(chalk.magenta(`☞ entering ${dir}`))
   process.chdir(dir)
   try {
-    ret = cb()
+    ret = await cb()
   } catch (err) {
     e = err
   } finally {
-    $.putln(chalk.green(`☜ leaving ${dir}`))
+    $.putln(chalk.magenta(`☜ leaving ${dir}`))
     process.chdir(original_wd)
   }
 
