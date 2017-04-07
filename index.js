@@ -82,7 +82,7 @@ $.putln = function (s) {
 
 $.show_versions = async function (names) {
   await bluebird.each(names, async function (name) {
-    const v = await $.get_output($.VERSION_SPECS[name]).trim()
+    const v = (await $.get_output($.VERSION_SPECS[name])).trim()
     $.putln(chalk.yellow(`★ ${name} ${v}`))
   })
   return true
