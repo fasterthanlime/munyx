@@ -1,6 +1,6 @@
 {
   "name": "munyx",
-  "version": "1.4.0",
+  "version": "2.0.0",
   "description": "A javascript library to write CI scripts (mostly for personal use)",
   "main": "index.js",
   "scripts": {
@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/fasterthanlime/munyx/issues"
   },
-  "homepage": "https://github.com/fasterthanlime/munyx#readme"
+  "homepage": "https://github.com/fasterthanlime/munyx#readme",
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "chalk": "^1.1.3"
+  }
 }
