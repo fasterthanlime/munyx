@@ -75,6 +75,8 @@ $.VERSION_SPECS = {
   ar: 'ar --version | head -1'
 }
 
+$.benchmark = false
+
 $.putln = function (s) {
   process.stdout.write(s + '\n')
   return true
@@ -94,6 +96,8 @@ $.say = function (cmd) {
 }
 
 async function system (cmd, opts = {}) {
+  const start = Date.now();
+
   const child = child_process.spawn(SH_PATH, ['-c', cmd], {
     stdio: 'inherit'
   })
@@ -113,6 +117,12 @@ async function system (cmd, opts = {}) {
     $.putln(chalk.red(`☃ error executing ${cmd}`));
     $.putln(chalk.red(`...at ${error.stack}`));
     return false
+  }
+
+  if ($.benchmark) {
+    const end = Date.now();
+    const ms = end - start;
+    $.putln(chalk.cyan(`⌚ ${cmd} took ${(ms / 1000).toFixed(3)}s`));
   }
 
   return true
