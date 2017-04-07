@@ -129,6 +129,8 @@ async function system (cmd, opts = {}) {
 }
 
 $.get_output = async function (cmd) {
+  const start = Date.now();
+
   const child = child_process.spawn(SH_PATH, ['-c', cmd], {
     encoding: 'utf8'
   })
@@ -151,6 +153,12 @@ $.get_output = async function (cmd) {
     $.putln(chalk.red(`☃ error executing ${cmd}`));
     $.putln(chalk.red(`...at ${error.stack}`));
     throw new Error("get_output: couldn't execute command");
+  }
+
+  if ($.benchmark) {
+    const end = Date.now();
+    const ms = end - start;
+    $.putln(chalk.cyan(`⌚ ${cmd} (get_output) took ${(ms / 1000).toFixed(3)}s`));
   }
 
   return stdout;
